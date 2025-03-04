@@ -1,0 +1,15 @@
+torch    
+torchvision
+multiprocess
+munch
+networkx         
+nibabel     
+numpy      
+opencv-python
+packaging   
+pandas
+pillow       
+matplotlib
+imageio-ffmpeg
+yacs
+matplotlib
