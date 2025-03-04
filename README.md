@@ -1,30 +1,38 @@
+##### The "Capsule Endoscopy Segmentation" folder contains the code for the first step of small intestine segmentation:
 
+- `expconfigs_new/exp02_f0_pretrain_th_gau.yaml` is used for pretraining the encoder for a three-class classification. Run the training with:
+  `CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/exp02_f0_pretrain_th_gau.yaml`
+- `expconfigs_new/exp03_f0_resTFE_gau.yaml` is used to train CNN+Transformer for three-class classification. Run the training with:
+  `CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/exp03_f0_resTFE_gau.yaml`
+- `expconfigs_new/test_exp03_f0_resTFE_gau.yaml` is used for binary classification to search for the start and end points of the small intestine. Run the test with:
+  `CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/test_exp03_f0_resTFE_gau.yaml --test`
 
-##### Capsule endoscopy segmentation文件夹中存放了第一步进行小肠分段的代码
+For video file format, store the video in the folder (the format should be `.avi`). The naming format is `[name's last character corresponding to Unicode 20xx_xx_xx]`. Use the script `prepare/find_frame.py` to find the start frames of the stomach, small intestine, and colon in the video, based on the time recorded at the top right of the video frame (since frames may drop during video transmission, we can only find the corresponding frame based on the time recorded). The CSV file must match the format of `Data/data_example.csv`.
 
-* ``expconfigs_new/exp02_f0_pretrain_th_gau.yaml``是预训练编码器进行三分类，``CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/exp02_f0_pretrain_th_gau.yaml``进行训练
-* ``expconfigs_new/exp03_f0_resTFE_gau.yaml``是训练CNN+Transformer进行三分类，``CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/exp03_f0_resTFE_gau.yaml``进行训练
-* ``expconfigs_new/test_exp03_f0_resTFE_gau.yaml``是进行二分类搜索找到小肠起点和终点，``CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/test_exp03_f0_resTFE_gau.yaml --test``进行测试
+------
 
-视频文件格式要个文件夹里放一个视频（格式为avi），然后命名格式为``名字的最后一个字对应的Unicode 20xx_xx_xx``.使用prepare/find_frame.py得到胃、小肠大肠起始时间在视频里对应的起始帧（因为视频传输会掉帧，所以只能通过视频帧右上角记录的时间来找对应帧）。csv文件需要与Data/data_example.csv格式一致。
+##### The "Small Intestine Frame Lesion Classification" folder contains the code for the second step of lesion identification:
 
-##### Small intestine frame lesion classification文件夹中存放了第二部进行病变识别的代码
+- Run binary classification training with:
+  `CUDA_VISIBLE_DEVICES=0 python train.py`
+- Run binary classification testing with:
+  `CUDA_VISIBLE_DEVICES=0 python infer.py`
 
-* ``CUDA_VISIBLE_DEVICES=0 python train.py``训练二分类
-* ``CUDA_VISIBLE_DEVICES=0 python infer.py``测试二分类
+Ensure that the image files are saved in the same format as in the data folder.
 
-图片文件格式要与data文件夹下的格式保存一致
+------
 
-``SingleObjectLocalization``文件夹存放了弱监督识别的代码，``Train.sh``用来训练，``Test.sh``用来测试生成热图和标注框并且获取测试指标
+##### The "SingleObjectLocalization" folder contains the weakly supervised recognition code. The `Train.sh` script is used for training, and the `Test.sh` script is used for testing, generating heatmaps and bounding boxes, and obtaining test metrics.
 
-##### Lesion small intestine frame Crohn's diagnosis文件中中存放了第三步进行克罗恩病识别的代码
+------
 
-* ``expconfigs_new/test01_get_framsnpy.yaml``得到每个病人每张小肠帧的特征的npy，以及小肠帧对应的预测的病变概率。提取特征使用的上一步的Efficientnet的权重。``CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/test01_get_framsnpy.yaml --test`` 进行提取特征
-* ``expconfigs_new/test02_gettop2000.yaml``把小肠段分成4段，每段里面取预测病变概率最高的500帧。``CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/test02_gettop2000.yaml --test``进行分段
-* ``expconfigs_new/exp02_focalloss.yaml``训练TF2进行克罗恩病二分类。``CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/exp02_focalloss.yaml``训练二分类
-* ``expconfigs_new/test03_focalloss.yaml``测试克罗恩病分类效果。``CUDA_VISIBLE_DEVICES=0 python main.pt --config expconfigs_new/test03_focalloss.yaml --test``进行测试
+##### The "Lesion Small Intestine Frame Crohn's Diagnosis" folder contains the code for the third step of Crohn's disease recognition:
 
-
-
-
-
+- `expconfigs_new/test01_get_framsnpy.yaml` extracts the features (as `.npy` files) for each patient's small intestine frames and the predicted lesion probability for each frame. The feature extraction uses the EfficientNet weights from the previous step. Run the extraction with:
+  `CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/test01_get_framsnpy.yaml --test`
+- `expconfigs_new/test02_gettop2000.yaml` divides the small intestine segments into 4 parts, and selects the 500 frames with the highest predicted lesion probability from each segment. Run the segmentation with:
+  `CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/test02_gettop2000.yaml --test`
+- `expconfigs_new/exp02_focalloss.yaml` trains a TF2 model for Crohn's disease binary classification. Run the training with:
+  `CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/exp02_focalloss.yaml`
+- `expconfigs_new/test03_focalloss.yaml` tests the Crohn's disease classification performance. Run the test with:
+  `CUDA_VISIBLE_DEVICES=0 python main.py --config expconfigs_new/test03_focalloss.yaml --test`
