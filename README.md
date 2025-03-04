@@ -1,6 +1,6 @@
 #### Please perform the following steps:
 
-**Step 1 **: Clone the project
+**Step 1**: Clone the project
 
 ```
 git clone https://github.com/liuzh385/INTELCAPE.git
