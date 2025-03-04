@@ -1,0 +1,47 @@
+
+EXP: "exp03_f0_resTFE"
+
+MODEL:
+  CE_LOSS: True
+  WEIGHT_PRETRAIN: "/opt/data/private/code02/weights/best_exp02_100_f0_res_ResNet_fold0.pth"
+  FIXED: True
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+OPT:
+  BASE_LR: 1e-5
+  WEIGHT_DECAY: 1e-3
+  OPTIMIZER: "adamw"
+
+DATA:
+  NAME: "Crohn15to23"
+  NUM: 12
+  STEP: 1
+  CROP: 320
+
+DIRS:
+  DATA: "/opt/data/private/crohn_data/crohn_avi"
+  DATA_CSV: "/opt/data/private/crohn_data/Crohn_frame_flag_all.csv"
+  TEST: "./test/_ResNet34_TFE_50_f0"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet_TFE"
+  EPOCHS: 50
+  BATCH_SIZE: 96
+  AUGMENTATION: True
+  FOLD: 0
+
+VAL:
+  BATCH_SIZE: 96
+  FOLD: 0
+
+TEST:
+  BATCH_SIZE: 96
+  FOLD: 0
+  PRED: 0
+  TIMES: 5
+

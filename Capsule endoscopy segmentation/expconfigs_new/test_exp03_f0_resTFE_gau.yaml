@@ -1,0 +1,54 @@
+
+EXP: "test03_f0_resTFE_gau_lz"
+
+MODEL:
+  CE_LOSS: True
+  # WEIGHT_PRETRAIN: "/mnt/minio/node77/liuzheng/RJ/weights_pre/best_exp02_100_f0_res_gau_ResNet_gau_fold0.pth"
+  # WEIGHT: "/mnt/minio/node77/liuzheng/RJ/weights_pre/best_exp03_f0_resTFE_gau_lz_ResNet_TFE_gau_fold0.pth"
+  
+  WEIGHT_PRETRAIN: "/mnt/minio/node77/liuzheng/RJ/code02_2/weights/best_exp02_100_f0_res_gau_ResNet_gau_fold0.pth"
+  WEIGHT: "/mnt/minio/node77/liuzheng/RJ/code02_2/weights/exp03_f0_resTFE_gau_ResNet_TFE_gau_fold0.pth"
+  
+SYSTEM: 
+  NUM_WORKERS: 4
+
+OPT:
+  BASE_LR: 1e-5
+  WEIGHT_DECAY: 1e-3
+  OPTIMIZER: "adamw"
+
+DATA:
+  NAME: "Crohn2016"
+  NUM: 12
+  SEG: "all"
+  CROP: 320
+
+DIRS:
+  # DATA: "/mnt/minio/node77/liuzheng/RJ/Data/RJ_mp4"
+  # DATA_CSV: "/mnt/minio/node77/liuzheng/RJ/Data/csv/RG_Frame.csv"
+  # TEST: "/mnt/minio/node77/liuzheng/RJ/RJ_class/test"
+
+  DATA: "/mnt/minio/node77/liuzheng/Six_30/six_30avi"
+  DATA_CSV: "/mnt/minio/node77/liuzheng/Six_30/six_pk.csv"
+  TEST: "/mnt/minio/node77/liuzheng/Six_30/get_small"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet_TFE_gau"
+  EPOCHS: 50
+  BATCH_SIZE: 96
+  AUGMENTATION: True
+  FOLD: 0
+
+VAL:
+  BATCH_SIZE: 96
+  FOLD: 0
+
+TEST:
+  BATCH_SIZE: 1
+  FOLD: 0
+  PRED: 2
+  CAM: False
+

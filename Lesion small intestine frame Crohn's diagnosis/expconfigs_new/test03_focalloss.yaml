@@ -1,0 +1,58 @@
+EXP: "test03_classify_crohn_focalloss_8"
+
+MODEL:
+  CE_LOSS: True
+  # WEIGHT: "/opt/data/private/code07/weights_new/exp02_focalloss/best_exp02_classify_crohn_focalloss_TF2_fold0.pth"
+  # WEIGHT: "/opt/data/private/code07/weights_new/exp02_focalloss_6/exp02_classify_crohn_focalloss_6_TF2_fold0_epo15.pth"
+  # WEIGHT: "/opt/data/private/code07/weights_new/exp02_focalloss_7/exp02_classify_crohn_focalloss_7_TF2_fold0_epo15.pth"
+  # WEIGHT: "/opt/data/private/code07/weights_new/exp02_focalloss/exp02_classify_crohn_focalloss_TF2_fold0.pth"
+  WEIGHT: "/opt/data/private/code07/weights_new/exp02_focalloss_12/best_tf1_6_tf2_2_cos4_alp45_350_TF2_fold0_epo32.pth"
+  # WEIGHT: "/opt/data/private/code07/weights_new/exp02_focalloss_lz/tf1_6_tf2_2_cos4_alp45_350_2_TF2_fold0_epo35.pth"
+  # WEIGHT: "/opt/data/private/code07/weights_new/exp02_focalloss_lz/best_tf1_6_tf2_2_cos4_alp45_350_2_TF2_fold0_epo35.pth"
+
+
+DATA:
+  NAME: "Crohn_seq_feature"
+  INP_CHANNELS: 512
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+# DIRS:
+#   # DATA: "/data/zxk/code/code07/data/seqs/features"
+#   DATA: "/opt/data/private/code07/data/seq_all_new/features4_500"
+#   # DATA_CSV: "/opt/data/private/crohn_data/crohn_lesions_all_split.csv"
+#   DATA_CSV: "/opt/data/private/crohn_data/crohn_lesions_all_split.csv"
+#   TEST: "/opt/data/private/code07/test_new/test03_focalloss_lz"
+#   LOGS: "/opt/data/private/code07/logs_new/test03_focalloss_lz"
+#   OUTPUTS: "/opt/data/private/code07/outputs_new/test03_focalloss_lz"
+
+DIRS:
+  # DATA: "/data/zxk/code/code07/data/seqs/features"
+  DATA: "/opt/data/private/code07/data/seq_all_new/features4_500"
+  # DATA_CSV: "/opt/data/private/crohn_data/crohn_lesions_all_split.csv"
+  DATA_CSV: "/opt/data/private/crohn_data/modified_file.csv"
+  TEST: "/opt/data/private/code07/test_new/test03_focalloss_six"
+  LOGS: "/opt/data/private/code07/logs_new/test03_focalloss_six"
+  OUTPUTS: "/opt/data/private/code07/outputs_new/test03_focalloss_six"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "TF2"
+  NUM_CLASS: 2
+  EPOCHS: 100
+  BATCH_SIZE: -1
+  AUGMENTATION: True
+  # FOLD: 4
+
+VAL:
+  BATCH_SIZE: -1
+  # FOLD: 4
+
+TEST:
+  # FOLD: 4
+  BATCH_SIZE: 1
+  PRED: 9
+  TIMES: 0

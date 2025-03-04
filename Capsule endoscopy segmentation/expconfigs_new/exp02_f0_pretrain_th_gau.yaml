@@ -1,0 +1,36 @@
+
+EXP: "exp02_100_f0_res_gau"
+
+MODEL:
+  CE_LOSS: True
+
+DATA:
+  NAME: "Crohn15to23"
+  NUM: 1
+  SEG: "all"
+  CROP: 500
+
+DIRS:
+  DATA: "/mnt/minio/node77/liuzheng/RJ/Data/RJ_mp4"
+  DATA_CSV: "/mnt/minio/node77/liuzheng/RJ/Data/csv/RG_Frame.csv"
+  TEST: "/mnt/minio/node77/liuzheng/RJ/RJ_class/pre"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet_gau"
+  EPOCHS: 50
+  BATCH_SIZE: 64
+  AUGMENTATION: True
+  FOLD: 0
+
+VAL:
+  BATCH_SIZE: 64
+  FOLD: 0
+
+TEST:
+  BATCH_SIZE: 64
+  PRED: 0
+  FOLD: 0
+  TIMES: 5

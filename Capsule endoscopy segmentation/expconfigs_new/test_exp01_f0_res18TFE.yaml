@@ -1,0 +1,40 @@
+EXP: "test01_res18TFE"
+
+MODEL:
+  CE_LOSS: True
+  WEIGHT_PRETRAIN: "/opt/data/private/code02/weights/best_exp00_100_f0_res_ResNet18_fold0.pth"
+  WEIGHT: "/opt/data/private/code02/weights/best_exp01_f0_resTFE_ResNet_TFE_fold0.pth"
+
+DATA:
+  NAME: "Crohn2016"
+  NUM: 12
+  SEG: "all"
+  CROP: 320
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+DIRS:
+  DATA: "/opt/data/private/crohn_data/crohn_avi"
+  DATA_CSV: "/opt/data/private/crohn_data/Crohn_frame_flag_all.csv"
+  TEST: "./test/Res18TFE_test"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet_TFE"
+  EPOCHS: 101
+  BATCH_SIZE: 64
+  AUGMENTATION: True
+  FOLD: 0
+
+VAL:
+  BATCH_SIZE: 64
+  FOLD: 0
+
+TEST:
+  BATCH_SIZE: 1
+  FOLD: 0
+  PRED: 2
+  CAM: False

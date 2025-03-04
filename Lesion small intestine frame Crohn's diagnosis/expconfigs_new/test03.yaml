@@ -1,0 +1,41 @@
+EXP: "test03_classify_crohn_2"
+
+MODEL:
+  CE_LOSS: True
+  WEIGHT: "/opt/data/private/code07/weights_new/exp02_2/exp02_classify_crohn_2_TF2_fold0.pth"
+
+DATA:
+  NAME: "Crohn_seq_feature"
+  INP_CHANNELS: 512
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+DIRS:
+  # DATA: "/data/zxk/code/code07/data/seqs/features"
+  DATA: "/opt/data/private/code07/data/seq_all_new/features4_500"
+  DATA_CSV: "/opt/data/private/crohn_data/crohn_lesions_all_split_test.csv"
+  TEST: "/opt/data/private/code07/test_new/test03_2"
+  LOGS: "/opt/data/private/code07/logs_new/test03_2"
+  OUTPUTS: "/opt/data/private/code07/outputs_new/test03_2"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "TF2"
+  NUM_CLASS: 2
+  EPOCHS: 100
+  BATCH_SIZE: -1
+  AUGMENTATION: True
+  # FOLD: 4
+
+VAL:
+  BATCH_SIZE: -1
+  # FOLD: 4
+
+TEST:
+  # FOLD: 4
+  BATCH_SIZE: 1
+  PRED: 9
+  TIMES: 0

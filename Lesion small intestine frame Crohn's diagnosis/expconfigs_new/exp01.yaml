@@ -1,0 +1,44 @@
+EXP: "exp01_15k_e20"
+
+MODEL:
+  CE_LOSS: True
+  IMAGENET_PRETRAIN: True
+
+DATA:
+  NAME: "Crohn_frame_all"
+  SIZE: 256
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+OPT:
+  BASE_LR: 1e-3
+  WEIGHT_DECAY: 1e-2
+  OPTIMIZER: "adamw"
+
+DIRS:
+  DATA: "/opt/data/private/crohn_data/small_int_jpg"
+  DATA_CSV: "/opt/data/private/crohn_data/crohn_lesions_all_split.csv"
+  TEST: "/opt/data/private/code07/test_new/"
+  WEIGHTS: "/opt/data/private/code07/weights_new/"
+  LOGS: "/opt/data/private/code07/logs_new/"
+  OUTPUTS: "/opt/data/private/code07/outputs_new/"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet"
+  NUM_CLASS: 2
+  EPOCHS: 20
+  BATCH_SIZE: 256
+  FOLD: 0
+  AUGMENTATION: True
+
+VAL:
+  BATCH_SIZE: 256
+  EPOCH: 1
+
+TEST:
+  BATCH_SIZE: 128
+  PRED: 0

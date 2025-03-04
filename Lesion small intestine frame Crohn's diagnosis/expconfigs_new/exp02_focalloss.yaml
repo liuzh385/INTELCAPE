@@ -1,0 +1,45 @@
+EXP: "tf1_6_tf2_2_cos4_alp45_350_2"
+
+MODEL:
+  FOCAL_LOSS: True
+
+DATA:
+  NAME: "Crohn_seq_feature"
+  INP_CHANNELS: 512
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+OPT:
+  BASE_LR: 1e-4
+  WEIGHT_DECAY: 1e-4
+  OPTIMIZER: "adamw"
+
+DIRS:
+  # DATA: "/data/zxk/code/code07/data/seqs/features"
+  DATA: "/opt/data/private/Rj_crohn/data/seq_all_new/features4_500"
+  DATA_CSV: "/opt/data/private/Rj_crohn/RJ_lesions_all_folds.csv"
+  TEST: "/opt/data/private/code07/test_new/exp02_focalloss_lz"
+  WEIGHTS: "/opt/data/private/code07/weights_new/exp02_focalloss_lz"
+  LOGS: "/opt/data/private/code07/logs_new/exp02_focalloss_lz"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "TF2"
+  NUM_CLASS: 2
+  EPOCHS: 50
+  BATCH_SIZE: 1
+  AUGMENTATION: True
+  # FOLD: 4
+
+VAL:
+  BATCH_SIZE: 1
+  # FOLD: 4
+
+TEST:
+  # FOLD: 4
+  BATCH_SIZE: 1
+  PRED: 9
+  TIMES: 0

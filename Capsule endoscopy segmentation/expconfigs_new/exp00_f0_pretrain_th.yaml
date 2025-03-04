@@ -1,0 +1,36 @@
+
+EXP: "exp01_100_f0_res"
+
+MODEL:
+  CE_LOSS: True
+
+DATA:
+  NAME: "Crohn15to23"
+  NUM: 1
+  SEG: "all"
+  CROP: 320
+
+DIRS:
+  DATA: "/opt/data/private/crohn_data/crohn_avi"
+  DATA_CSV: "/opt/data/private/crohn_data/Crohn_frame_flag_all.csv"
+  TEST: "./test/ResNet18"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet18"
+  EPOCHS: 101
+  BATCH_SIZE: 64
+  AUGMENTATION: True
+  FOLD: 0
+
+VAL:
+  BATCH_SIZE: 64
+  FOLD: 0
+
+TEST:
+  BATCH_SIZE: 64
+  PRED: 0
+  FOLD: 0
+  TIMES: 5

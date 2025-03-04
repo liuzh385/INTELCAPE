@@ -1,0 +1,6 @@
+exp01.yaml：本来是要初步训练一个克罗恩病二分类的resnet34，但效果不好，就没用了。直接沿用上一步有无病变二分类的resnet34。
+test01_get_framsnpy.yaml：得到每个病人每张小肠帧的特征的npy，以及小肠帧对应的预测的病变概率。
+test02_gettop2000.yaml：把小肠段分成4段，每段里面取预测病变概率最高的500帧。
+exp02.yaml：没有加focalloss训练TF2进行克罗恩病二分类。
+exp02_focalloss.yaml：没有加focalloss训练TF2进行克罗恩病二分类。最终效果最好的是每段取了450帧。
+test03.yaml和test03_focalloss.yaml：测试克罗恩病分类效果。

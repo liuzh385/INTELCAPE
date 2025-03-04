@@ -1,0 +1,38 @@
+EXP: "test02_2_gettop4000"
+
+MODEL:
+  CE_LOSS: True
+  WEIGHT: "/opt/data/private/code07/weights/best_resnet34.pth"
+  FEATURE_EXTRACTOR: True
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+DATA:
+  NAME: "Crohn_seq_feature_prepare"
+  SIZE: 256
+
+DIRS:
+  DATA: "/opt/data/private/code07/data/seq_all_new/samples"
+  DATA_CSV: "/opt/data/private/crohn_data/crohn_lesions_all_split.csv"
+  TEST: "/opt/data/private/code07/data/seq_all_new/"
+  WEIGHTS: "/opt/data/private/code07/weights_new/"
+  LOGS: "/opt/data/private/code07/logs_new/"
+  OUTPUTS: "/opt/data/private/code07/data/seq_all_new/features4_1000"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet"
+  NUM_CLASS: 2
+  EPOCHS: 10
+  BATCH_SIZE: -1
+
+VAL:
+  BATCH_SIZE: -1
+
+TEST:
+  BATCH_SIZE: 1000  # frame per part
+  PRED: 4  # num of part
+  FOLD: -1  # idx of part

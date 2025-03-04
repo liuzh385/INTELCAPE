@@ -1,0 +1,48 @@
+
+EXP: "exp03_f0_resTFE_gau_lz"
+
+MODEL:
+  CE_LOSS: True
+  WEIGHT_PRETRAIN: "/mnt/minio/node77/liuzheng/RJ/weights_pre/best_exp02_100_f0_res_gau_ResNet_gau_fold0.pth"
+  WEIGHT: "/mnt/minio/node77/liuzheng/RJ/code02_2/weights/exp03_f0_resTFE_gau_ResNet_TFE_gau_fold0.pth"
+  FIXED: True
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+OPT:
+  BASE_LR: 1e-3
+  WEIGHT_DECAY: 1e-3
+  OPTIMIZER: "adamw"
+
+DATA:
+  NAME: "Crohn15to23"
+  NUM: 12
+  STEP: 1
+  CROP: 500
+
+DIRS:
+  DATA: "/mnt/minio/node77/liuzheng/RJ/Data/RJ_mp4"
+  DATA_CSV: "/mnt/minio/node77/liuzheng/RJ/Data/csv/RG_Frame.csv"
+  TEST: "/mnt/minio/node77/liuzheng/RJ/test/_ResNet34_gau_TFE_50_f0"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet_TFE_gau"
+  EPOCHS: 50
+  BATCH_SIZE: 96
+  AUGMENTATION: True
+  FOLD: 0
+
+VAL:
+  BATCH_SIZE: 96
+  FOLD: 0
+
+TEST:
+  BATCH_SIZE: 96
+  FOLD: 0
+  PRED: 0
+  TIMES: 5
+

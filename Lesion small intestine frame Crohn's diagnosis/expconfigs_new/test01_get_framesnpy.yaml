@@ -1,0 +1,40 @@
+
+EXP: "test01_get_framesnpy"
+
+MODEL:
+  CE_LOSS: True
+  WEIGHT: "/opt/data/private/code07/weights/best_resnet34.pth"
+  FEATURE_EXTRACTOR: False
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+DATA:
+  NAME: "Crohn_one"
+  SIZE: 256
+
+DIRS:
+  DATA: "/opt/data/private/Six_30/small_pic"
+  DATA_CSV: "/opt/data/private/Six_30/six_pk.csv"
+  TEST: "/opt/data/private/Six_30/seq_all_new"
+  WEIGHTS: "/opt/data/private/Six_30/seq_all_new"
+  LOGS: "/opt/data/private/Six_30/logs_new/"
+  OUTPUTS: "/opt/data/private/Six_30/outputs_new/"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "ResNet"
+  NUM_CLASS: 2
+  EPOCHS: 10
+  BATCH_SIZE: -1
+
+VAL:
+  BATCH_SIZE: -1
+
+TEST:
+  BATCH_SIZE: 128
+  PRED: 1
+  TIMES: 0
+

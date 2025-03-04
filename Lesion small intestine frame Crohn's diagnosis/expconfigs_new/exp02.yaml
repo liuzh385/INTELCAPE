@@ -1,0 +1,45 @@
+EXP: "exp02_classify_crohn_2"
+
+MODEL:
+  CE_LOSS: True
+
+DATA:
+  NAME: "Crohn_seq_feature"
+  INP_CHANNELS: 512
+
+SYSTEM:
+  NUM_WORKERS: 4
+
+OPT:
+  BASE_LR: 1e-5
+  WEIGHT_DECAY: 1e-4
+  OPTIMIZER: "adamw"
+
+DIRS:
+  # DATA: "/data/zxk/code/code07/data/seqs/features"
+  DATA: "/opt/data/private/code07/data/seq_all_new/features4_500"
+  DATA_CSV: "/opt/data/private/crohn_data/crohn_lesions_all_split.csv"
+  TEST: "/opt/data/private/code07/test_new/exp02_2"
+  WEIGHTS: "/opt/data/private/code07/weights_new/exp02_2"
+  LOGS: "/opt/data/private/code07/logs_new/exp02_2"
+
+METRIC:
+  SIGMOID: False
+
+TRAIN:
+  MODEL: "TF2"
+  NUM_CLASS: 2
+  EPOCHS: 100
+  BATCH_SIZE: 1
+  AUGMENTATION: True
+  # FOLD: 4
+
+VAL:
+  BATCH_SIZE: 1
+  # FOLD: 4
+
+TEST:
+  # FOLD: 4
+  BATCH_SIZE: 1
+  PRED: 9
+  TIMES: 1
